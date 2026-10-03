@@ -48,3 +48,6 @@ next-env.d.ts
 
 # Playwright/debug screenshots land in the repo root
 /*.png
+
+# Stray build experiments — never source
+/tmp/

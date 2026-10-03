@@ -14,12 +14,17 @@ export const profile = {
   motto: "If I have seen further it is by standing on the shoulders of giants.",
   mottoAuthor: "Isaac Newton",
   location: "Nairobi, Kenya (UTC+3)",
-  phone: "+254 701 735 347",
   email: "shadymutethia@gmail.com",
   linkedin: "https://www.linkedin.com/in/shadrack-mutethia",
   resume: "/resume.pdf",
-  avatar: "/passportPhoto.jpeg",
+  avatar: "/anime-passport.png",
+  /** Shown instead of `avatar` while the dark theme is active. */
+  avatarDark: "/anime-dark.jpeg",
+  // About section portrait — separate from the hero avatar on purpose.
+  portrait: "/passportPhoto.jpeg",
   banner: "/banner.jpg",
+  /** Shown instead of `banner` while the dark theme is active. */
+  bannerDark: "/darkbanner.jpeg",
 };
 
 export const links = {
@@ -45,22 +50,19 @@ export const nav = [
 
 export const intro = {
   /*
-   * The opening lines under the hero. Warm, first-person, built around what he
-   * loves: seeing the thing work, owning it end to end, and the sideways route
-   * in from energy auditing. MVPs with founders, his own products, one honest
-   * founder attempt.
+   * One paragraph under the hero. First-person, and deliberately short: what he
+   * loves about building, the sideways route in from energy auditing, and one
+   * honest nod to the founder attempt. It points down to About for the rest.
    */
   intro: [
-    "I build software, mostly to see if it works — and there's still nothing like the moment it does. MVPs with founders who had an idea and a deadline. Products of my own that got further than most side projects: a resume checker, a payments toolkit for M-Pesa, a music collaboration platform, file storage, dashboards. Once I tried being a founder myself, which is a story with its own ups and downs.",
-    "What I love is owning the whole thing. A founder needs an MVP in six weeks, so I build one. A payments integration keeps tripping people up, so I write the toolkit. Someone wants their files organised like a drive, so I build that too. Interface, API, database, deploy pipeline — start to finish, and I don't much mind being the only one who has to understand all of it. The range isn't deliberate; it's what happens when you like building more than specialising.",
-    "I came to this sideways, from energy auditing, which nobody recommends. Auditing installations meant reading specs closely and taking measurements seriously; technical support meant forming a theory, testing it, and admitting when it was wrong. Software has the same disease and the same remedies, and it's considerably more fun. I never went back — it turned out the thing I loved doing was this, and I get to keep doing it.",
+    "I build software, mostly to see if it works, and there's still nothing like the moment it does. I've chased that feeling building dashboards, payment systems, storage platforms, and whatever else a founder needed working by Friday. I came in sideways, from energy auditing, which nobody recommends. I also once tried being a founder myself. The full confession is on the About page.",
   ],
   /** Short bio for the About section. */
   about: [
-    "Full-stack engineer in Nairobi. I build software across the stack — interface, API, database, and the deploy pipeline that gets it live and keeps it there. Sometimes that's a developer tool, sometimes an MVP for a founder, sometimes a product I'm chasing because I think it should exist.",
-    "The founder attempt taught me more than the client work, which is a slightly embarrassing admission. Building a company means making every decision yourself and living with most of them, and it gave me a healthy respect for the things engineers usually skip: pricing, edge cases, what happens when a user does the one thing you didn't anticipate.",
-    "My route in was odd: energy engineering, then technical support, then building. It turned out to be decent preparation. Auditing meant taking measurements seriously; debugging production meant forming a theory and admitting when it was wrong. Software rewards exactly those habits.",
-    "Freelancing remotely since 2023, usually with people in other time zones. Fluent English, native Swahili. I care about developer experience, the parts of a system nobody demos in a talk, and software that doesn't need me watching it.",
+    "Full-stack engineer in Nairobi. I build software across the stack: interface, API, database, and the deploy pipeline that gets it live and keeps it there. Sometimes that's a developer tool, sometimes an MVP for a founder, sometimes a product I'm chasing because I think it should exist.",
+    "The founder attempt taught me more than the client work, which is a slightly embarrassing admission. Building a company means making every decision yourself and living with most of them. It gave me a healthy respect for the things engineers usually skip: pricing, edge cases, and what happens when a user does the one thing you didn't anticipate.",
+    "My route in was odd: energy engineering, then IoT tinkering with Arduino and a little C, then technical support, then building. It turned out to be decent preparation. Auditing meant taking measurements seriously. Debugging production meant forming a theory and admitting when it was wrong. Software rewards exactly those habits.",
+    "I care about developer experience, the parts of a system nobody demos in a talk, and software that doesn't need me watching it.",
   ],
 };
 
@@ -193,17 +195,22 @@ export type Project = {
   status?: string;
   href?: string;
   repo?: string;
-  /** Screenshot at public/covers/<file>; falls back to a letter placeholder. */
+  /** Screenshot at public/covers/<file>; falls back to a generated placeholder. */
   cover?: string;
   /** Small label overlaid on the cover, e.g. "New". */
   badge?: string;
+  /** Hex tint used by the placeholder until a real cover is added. */
+  accent?: string;
 };
 
 /*
- * Three projects, chosen because they're the ones worth explaining. Everything
+ * Four projects, chosen because they're the ones worth explaining. Everything
  * else lives on GitHub — the "View All" link below. Verified against the GitHub
  * API: names, descriptions, languages and homepage URLs. TuneCol isn't public on
  * GitHub, so it links to the live demo only.
+ *
+ * Drop screenshots into public/covers/<slug>.png and set `cover` to use a real
+ * image; until then each card renders a generated placeholder tinted by `accent`.
  */
 export const projects: Project[] = [
   {
@@ -216,6 +223,7 @@ export const projects: Project[] = [
     status: "Live",
     href: "https://tunecol.com/",
     badge: "New",
+    accent: "#a78bfa",
   },
   {
     name: "Resume Checker",
@@ -227,6 +235,7 @@ export const projects: Project[] = [
     status: "Live",
     href: "https://resume-cheq.vercel.app/",
     repo: "https://github.com/Slimdaddy254/resume-checker",
+    accent: "#34d399",
   },
   {
     name: "next-ops",
@@ -237,6 +246,19 @@ export const projects: Project[] = [
     tags: ["TypeScript"],
     status: "In progress",
     repo: "https://github.com/Slimdaddy254/next-ops",
+    accent: "#fbbf24",
+  },
+  {
+    name: "File Storage",
+    year: "2025",
+    summary: "Google Drive-style file storage with expiring share links.",
+    detail:
+      "Full file storage on Express, Prisma and Cloudinary: folders, uploads, authentication, and shareable links that expire on their own. Built because sharing a file shouldn't mean trusting a permanent public URL.",
+    tags: ["Express", "Prisma", "PostgreSQL", "Cloudinary", "JWT"],
+    status: "Live",
+    href: "https://file-uploader-3gqw.onrender.com/",
+    repo: "https://github.com/Slimdaddy254/file-uploader",
+    accent: "#38bdf8",
   },
 ];
 /*
@@ -287,9 +309,7 @@ export const stack = {
       title: "Cloud & DevOps",
       items: [
         "AWS",
-        "Azure",
         "Docker",
-        "Kubernetes",
         "CI/CD",
         "Jenkins",
         "GitHub Actions",

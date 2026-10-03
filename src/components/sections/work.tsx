@@ -14,6 +14,8 @@ const statusColor: Record<string, string> = {
 };
 
 function Card({ project, index }: { project: Project; index: number }) {
+  const accent = project.accent ?? "#8b8b96";
+
   return (
     <Reveal delay={index * 50} className="h-full">
       <article className="group flex h-full flex-col">
@@ -28,9 +30,32 @@ function Card({ project, index }: { project: Project; index: number }) {
               className="object-cover transition-transform duration-500 group-hover:scale-[1.02]"
             />
           ) : (
-            <div className="grid size-full place-items-center">
-              <span className="font-serif text-3xl text-muted-foreground/40">
+            <div className="relative grid size-full place-items-center overflow-hidden">
+              {/* Tinted glow, so each card reads as its own thing rather than
+                  four identical grey boxes while screenshots are pending. */}
+              <div
+                aria-hidden
+                className="absolute inset-0"
+                style={{
+                  background: `radial-gradient(120% 90% at 18% 8%, ${accent}2e, transparent 62%)`,
+                }}
+              />
+              <div
+                aria-hidden
+                className="absolute inset-0 opacity-[0.3]"
+                style={{
+                  backgroundImage: `radial-gradient(${accent}59 1px, transparent 1px)`,
+                  backgroundSize: "18px 18px",
+                }}
+              />
+              <span
+                className="relative font-serif text-5xl"
+                style={{ color: accent }}
+              >
                 {project.name.charAt(0)}
+              </span>
+              <span className="absolute bottom-3.5 left-4 text-[11px] uppercase tracking-[0.18em] text-muted-foreground/70">
+                {project.name}
               </span>
             </div>
           )}

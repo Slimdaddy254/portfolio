@@ -17,7 +17,7 @@ export default function About() {
           <Reveal>
             <div className="relative aspect-[3/4] w-full overflow-hidden rounded-[10px] border border-border bg-card">
               <Image
-                src={profile.avatar}
+                src={profile.portrait ?? profile.avatar}
                 alt={profile.name}
                 fill
                 sizes="220px"

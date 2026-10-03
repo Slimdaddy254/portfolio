@@ -1,6 +1,6 @@
-import Image from "next/image";
 import Reveal from "@/components/reveal";
 import { Section } from "@/components/section";
+import ThemeAvatar from "@/components/theme-avatar";
 import { contact, profile } from "@/lib/data";
 
 export default function Contact() {
@@ -18,13 +18,7 @@ export default function Contact() {
               href={`mailto:${profile.email}`}
               className="mt-6 inline-flex items-center gap-2.5 rounded-full border border-border bg-card px-6 py-3 text-sm transition-colors hover:bg-chip"
             >
-              <Image
-                src={profile.avatar}
-                alt=""
-                width={24}
-                height={24}
-                className="size-6 rounded-full object-cover"
-              />
+              <ThemeAvatar decorative sizes="24px" className="size-6" />
               {contact.ctaLabel}
             </a>
 

@@ -5,7 +5,6 @@ import {
   LinkedInIcon,
   MailIcon,
   MediumIcon,
-  PhoneIcon,
   ResumeIcon,
   TwitterIcon,
   YoutubeIcon,
@@ -21,7 +20,6 @@ const platforms = [
 
 const contactItems = [
   { href: `mailto:${profile.email}`, label: profile.email, Icon: MailIcon },
-  { href: `tel:${profile.phone.replace(/\s/g, "")}`, label: profile.phone, Icon: PhoneIcon },
 ];
 
 export default function Footer() {

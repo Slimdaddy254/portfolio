@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Reveal from "@/components/reveal";
+import ThemeAvatar from "@/components/theme-avatar";
 import ThemeToggle from "@/components/theme-toggle";
 import { intro, links, profile } from "@/lib/data";
 import {
@@ -23,16 +24,36 @@ export default function Hero({ banner }: { banner?: string }) {
       {/* Banner spans the full container width and starts at the very top of the
           page — no padding above it. */}
       <div className="mx-auto w-full max-w-5xl">
-        <div className="relative h-[220px] w-full overflow-hidden sm:h-[260px]">
+        {/*
+          Two banners stacked in the same box. Only one is visible at a time,
+          so the theme toggle crossfades instead of swapping (which would flash
+          the background between them).
+        */}
+        <div
+          className={`relative h-[220px] w-full overflow-hidden sm:h-[260px] ${
+            banner && profile.bannerDark ? "theme-pair" : ""
+          }`}
+        >
           {banner ? (
-            <Image
-              src={banner}
-              alt=""
-              fill
-              priority
-              sizes="(max-width: 1024px) 100vw, 1024px"
-              className="object-cover"
-            />
+            <>
+              <Image
+                src={banner}
+                alt=""
+                fill
+                priority
+                sizes="(max-width: 1024px) 100vw, 1024px"
+                className="theme-img theme-img--light object-cover"
+              />
+              {profile.bannerDark && (
+                <Image
+                  src={profile.bannerDark}
+                  alt=""
+                  fill
+                  sizes="(max-width: 1024px) 100vw, 1024px"
+                  className="theme-img theme-img--dark object-cover"
+                />
+              )}
+            </>
           ) : (
             <div className="size-full bg-card" />
           )}
@@ -55,13 +76,10 @@ export default function Hero({ banner }: { banner?: string }) {
             required: the banner is positioned, so without it the banner paints
             over this row. */}
         <div className="relative z-10 -mt-12 flex flex-col gap-6 sm:-mt-14 sm:flex-row sm:items-end sm:justify-between">
-          <Image
-            src={profile.avatar}
-            alt={profile.name}
-            width={112}
-            height={112}
+          <ThemeAvatar
             priority
-            className="size-24 rounded-full object-cover ring-2 ring-white/90 sm:size-28"
+            sizes="(max-width: 640px) 96px, 112px"
+            className="size-24 rounded-full ring-2 ring-white/90 sm:size-28"
           />
         </div>
 
