@@ -195,7 +195,7 @@ export type Project = {
   status?: string;
   href?: string;
   repo?: string;
-  /** Screenshot at public/covers/<file>; falls back to a generated placeholder. */
+  /** Path under public/; falls back to a generated placeholder. */
   cover?: string;
   /** Small label overlaid on the cover, e.g. "New". */
   badge?: string;
@@ -209,7 +209,7 @@ export type Project = {
  * API: names, descriptions, languages and homepage URLs. TuneCol isn't public on
  * GitHub, so it links to the live demo only.
  *
- * Drop screenshots into public/covers/<slug>.png and set `cover` to use a real
+ * Drop a screenshot into public/ and set `cover` to its path to use a real
  * image; until then each card renders a generated placeholder tinted by `accent`.
  */
 export const projects: Project[] = [
@@ -223,6 +223,7 @@ export const projects: Project[] = [
     status: "Live",
     href: "https://tunecol.com/",
     badge: "New",
+    cover: "/tunecol.jpeg",
     accent: "#a78bfa",
   },
   {
@@ -235,6 +236,7 @@ export const projects: Project[] = [
     status: "Live",
     href: "https://resume-cheq.vercel.app/",
     repo: "https://github.com/Slimdaddy254/resume-checker",
+    cover: "/resume.jpeg",
     accent: "#34d399",
   },
   {
@@ -246,6 +248,7 @@ export const projects: Project[] = [
     tags: ["TypeScript"],
     status: "In progress",
     repo: "https://github.com/Slimdaddy254/next-ops",
+    cover: "/next-ops.jpeg",
     accent: "#fbbf24",
   },
   {
