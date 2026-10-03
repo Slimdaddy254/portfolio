@@ -39,9 +39,14 @@ export default function Hero({ banner }: { banner?: string }) {
           {/* Dark scrim so the band reads as a photo in both themes instead of
               dissolving into the page. */}
           <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
-          <p className="absolute inset-x-0 bottom-5 text-center font-serif text-lg italic text-white/90 sm:text-xl">
-            {profile.motto}
-          </p>
+          <div className="absolute inset-x-0 bottom-5 px-6 text-center">
+            <p className="mx-auto max-w-xl font-serif text-base italic leading-snug text-white/90 sm:text-xl">
+              {profile.motto}
+            </p>
+            {profile.mottoAuthor && (
+              <p className="mt-2 text-xs text-white/60">— {profile.mottoAuthor}</p>
+            )}
+          </div>
         </div>
       </div>
 
@@ -62,7 +67,7 @@ export default function Hero({ banner }: { banner?: string }) {
 
         <div className="mt-5 flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
           <Reveal>
-            <h1 className="font-serif text-4xl font-medium italic leading-tight tracking-tight sm:text-5xl">
+            <h1 className="font-script text-[2.75rem] leading-tight sm:text-6xl">
               {profile.name}
             </h1>
             <p className="mt-2 text-sm text-muted-foreground sm:text-base">

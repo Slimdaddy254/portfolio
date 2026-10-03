@@ -54,6 +54,7 @@
 
   --font-sans: var(--font-hanken), ui-sans-serif, system-ui, sans-serif;
   --font-serif: var(--font-instrument), ui-serif, Georgia, serif;
+  --font-script: var(--font-pacifico), var(--font-instrument), cursive;
 
   --radius-card: 0.625rem;
 }

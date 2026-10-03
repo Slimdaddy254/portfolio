@@ -27,7 +27,7 @@ export default function About() {
           </Reveal>
 
           <Reveal delay={80}>
-            <h3 className="font-serif text-2xl font-medium italic">{profile.name}</h3>
+            <h3 className="font-script text-3xl leading-tight">{profile.name}</h3>
             <p className="mt-1 text-sm text-muted-foreground">{profile.role}</p>
             <div className="mt-4 space-y-4 text-[15px] leading-relaxed text-foreground/90">
               {intro.about.map((p) => (

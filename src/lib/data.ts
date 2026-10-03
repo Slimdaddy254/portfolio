@@ -11,15 +11,15 @@ export const profile = {
   name: "Shadrack Mutethia",
   role: "Full-Stack Software Engineer",
   handle: "@shady_mutethia",
-  motto: "Learned it backwards, shipped it forwards.",
+  motto: "If I have seen further it is by standing on the shoulders of giants.",
+  mottoAuthor: "Isaac Newton",
   location: "Nairobi, Kenya (UTC+3)",
   phone: "+254 701 735 347",
   email: "shadymutethia@gmail.com",
   linkedin: "https://www.linkedin.com/in/shadrack-mutethia",
   resume: "/resume.pdf",
-  avatar: "https://avatars.githubusercontent.com/u/56540442?v=4",
-  // TODO: replace with your own wide image (public/banner.png is a placeholder).
-  banner: "/banner.png",
+  avatar: "/passportPhoto.jpeg",
+  banner: "/banner.jpg",
 };
 
 export const links = {
@@ -34,6 +34,7 @@ export const headerSocials = ["github", "twitter", "linkedin", "resume"] as cons
 
 /** Full set of platforms, shown in the footer. */
 export const nav = [
+  { label: "Now", id: "now" },
   { label: "About", id: "about" },
   { label: "Experience", id: "journey" },
   { label: "Work", id: "work" },
@@ -60,6 +61,35 @@ export const intro = {
     "The founder attempt taught me more than the client work, which is a slightly embarrassing admission. Building a company means making every decision yourself and living with most of them, and it gave me a healthy respect for the things engineers usually skip: pricing, edge cases, what happens when a user does the one thing you didn't anticipate.",
     "My route in was odd: energy engineering, then technical support, then building. It turned out to be decent preparation. Auditing meant taking measurements seriously; debugging production meant forming a theory and admitting when it was wrong. Software rewards exactly those habits.",
     "Freelancing remotely since 2023, usually with people in other time zones. Fluent English, native Swahili. I care about developer experience, the parts of a system nobody demos in a talk, and software that doesn't need me watching it.",
+  ],
+};
+
+/*
+ * The "Now" section: a dated snapshot of what's currently occupying his time.
+ * Deliberately perishable — update it when it stops being true, or delete it.
+ */
+export const now = {
+  items: [
+    {
+      label: "Building",
+      text: "Healthtech products, in the health sector. Clinical software that has to survive contact with real data and real users — the kind of project where the data model either holds up or it doesn't, and finding out early is cheaper.",
+    },
+    {
+      label: "Also building",
+      text: "Custom developer tools and SaaS products on the side. Usually because I hit the same problem twice and got annoyed enough to fix it properly instead of working around it again.",
+    },
+    {
+      label: "Writing",
+      text: "On my experiences, my own thinking, and anything interesting I come across — mostly on Medium. If I've formed an opinion worth keeping, that's usually where it ends up.",
+    },
+    {
+      label: "Learning",
+      text: "AI engineering, and genuinely all of it: the models themselves, the tooling around them, and how to ship something actually useful with them rather than something that only demos well.",
+    },
+    {
+      label: "Otherwise",
+      text: "Helping people and businesses leverage technology. Usually that means being the person who properly understands what they're trying to do and can build it end to end.",
+    },
   ],
 };
 
@@ -163,7 +193,6 @@ export type Project = {
   status?: string;
   href?: string;
   repo?: string;
-  featured?: boolean;
   /** Screenshot at public/covers/<file>; falls back to a letter placeholder. */
   cover?: string;
   /** Small label overlaid on the cover, e.g. "New". */
@@ -171,8 +200,10 @@ export type Project = {
 };
 
 /*
- * All verified against the GitHub API: names, descriptions, languages and
- * homepage URLs. TuneCol is not public on GitHub — link only its live demo.
+ * Three projects, chosen because they're the ones worth explaining. Everything
+ * else lives on GitHub — the "View All" link below. Verified against the GitHub
+ * API: names, descriptions, languages and homepage URLs. TuneCol isn't public on
+ * GitHub, so it links to the live demo only.
  */
 export const projects: Project[] = [
   {
@@ -180,11 +211,10 @@ export const projects: Project[] = [
     year: "2026",
     summary: "Music collaboration platform with version history for every mix.",
     detail:
-      "A SaaS for music creators: project management with tasks, timesheets and reporting, real-time collaboration, and full version history so you can compare mixes side by side and revert to any earlier state. Accounts, team roles, and subscription billing.",
+      "A SaaS for music creators: project management with tasks, timesheets and reporting, real-time collaboration, and full version history so you can compare mixes side by side and revert to any earlier state. Accounts, team roles, and subscription billing. The version history is the part I'm proudest of — producers lose versions constantly, and no one else was storing them properly.",
     tags: ["TypeScript", "React", "Node.js", "Auth", "Billing"],
     status: "Live",
     href: "https://tunecol.com/",
-    featured: true,
     badge: "New",
   },
   {
@@ -192,103 +222,23 @@ export const projects: Project[] = [
     year: "2025",
     summary: "AI-powered ATS resume checker with compatibility scoring.",
     detail:
-      "Upload a CV, paste a job description, and get scored against what an applicant tracking system will actually parse. Built to find the reasons a good resume was getting filtered out.",
+      "Upload a CV, paste a job description, and get scored against what an applicant tracking system will actually parse. Built after watching competent people get filtered out by a piece of software reading their CV literally. It tells you which lines are costing you interviews.",
     tags: ["React", "TypeScript", "Node.js", "Express", "Tailwind CSS"],
     status: "Live",
     href: "https://resume-cheq.vercel.app/",
     repo: "https://github.com/Slimdaddy254/resume-checker",
-    featured: true,
-  },
-  {
-    name: "File Storage",
-    year: "2025",
-    summary: "Google Drive-style file storage with expiring share links.",
-    detail:
-      "Full file storage on Express, Prisma and Cloudinary: folders, uploads, authentication, and shareable links that expire on their own.",
-    tags: ["Express", "Prisma", "PostgreSQL", "Cloudinary", "JWT"],
-    status: "Live",
-    href: "https://file-uploader-3gqw.onrender.com/",
-    repo: "https://github.com/Slimdaddy254/file-uploader",
-    featured: true,
-  },
-  {
-    name: "CV Builder",
-    year: "2025",
-    summary: "MERN resume builder with live preview and PDF export.",
-    detail:
-      "A resume builder that keeps a live preview beside the form and exports a clean PDF when you're done. React and MongoDB, the way everyone learns them.",
-    tags: ["React", "TypeScript", "Node.js", "Express", "MongoDB"],
-    status: "Live",
-    href: "https://cv-builder-rose.vercel.app/",
-    repo: "https://github.com/Slimdaddy254/cv-builder",
   },
   {
     name: "next-ops",
     year: "2025",
     summary: "A multi-tenant operations platform.",
     detail:
-      "Multi-tenancy as the central problem — isolating data and configuration per tenant rather than bolting it on afterwards.",
+      "Multi-tenancy as the central problem rather than an afterthought — isolating data and configuration per tenant from the first migration onward. Still in progress, and the reason it's still in progress is that the isolation rules keep getting more subtle than the feature work.",
     tags: ["TypeScript"],
     status: "In progress",
     repo: "https://github.com/Slimdaddy254/next-ops",
-    featured: true,
-  },
-  {
-    name: "DarajaDev Toolkit",
-    year: "2025",
-    summary: "Open-source toolkit for M-Pesa payments and webhooks.",
-    detail:
-      "Building, testing and monitoring M-Pesa payment integrations in one place — fast setup, flexible APIs, real-time dashboards and CLI tools. Written for developers who are tired of stitching it together themselves.",
-    tags: ["Payments", "Webhooks", "CLI", "Open Source"],
-    status: "Published",
-    repo: "https://github.com/Slimdaddy254/darajadevToolkit",
-    featured: true,
-  },
-  {
-    name: "Inventory App",
-    year: "2025",
-    summary: "Inventory management app.",
-    detail: "A TypeScript take on tracking stock, built to get past tutorial territory.",
-    tags: ["TypeScript"],
-    status: "Live",
-    href: "https://inventory-app-five-tau.vercel.app/",
-    repo: "https://github.com/Slimdaddy254/inventory-app",
-  },
-  {
-    name: "Dashboard",
-    year: "2025",
-    summary: "Admin dashboard UI.",
-    detail:
-      "Dashboard layouts, tables and navigation patterns in Next.js — the kind of screen every internal tool needs and few tutorials bother with.",
-    tags: ["TypeScript", "Next.js"],
-    status: "Live",
-    href: "https://nextjs-dashboard-slimdaddy254s-projects.vercel.app/",
-    repo: "https://github.com/Slimdaddy254/next-dashboard",
-  },
-  {
-    name: "Swift Proxy",
-    year: "2025",
-    summary: "Free browser-based proxy scraper.",
-    detail:
-      "Gathers fresh proxies from around the world and runs entirely in the browser, so there's nothing to install and no server to keep alive.",
-    tags: ["TypeScript", "Web Scraping"],
-    status: "Live",
-    href: "https://jinef-john.github.io/swift-proxy/",
-    repo: "https://github.com/Slimdaddy254/swift-proxy",
-  },
-  {
-    name: "Madaraka Express",
-    year: "2025",
-    summary: "Next.js project built to learn the framework properly.",
-    detail:
-      "Deliberately built to master Next.js — routing, data fetching, and the parts that only make sense once you've hit them.",
-    tags: ["Next.js"],
-    status: "Live",
-    href: "https://madaraka-express-clone.vercel.app/",
-    repo: "https://github.com/Slimdaddy254/Madaraka-Express",
   },
 ];
-
 /*
  * Languages come from GitHub's language stats; tools from what the repos
  * actually import. Prune anything you don't want to be asked about.
@@ -367,8 +317,8 @@ export const contact = {
   closer:
     "If you need something built, or want to talk about what it takes to get an MVP over the line — get in touch.",
   ctaLabel: "Get in touch",
-  quote: "Move fast with stable infrastructure.",
-  quoteAuthor: "Mark Zuckerberg",
+  quote: "Stay hungry. Stay foolish.",
+  quoteAuthor: "Steve Jobs",
   heading: "Let's connect",
   sub: "Find me on these platforms",
 };

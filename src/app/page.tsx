@@ -5,6 +5,7 @@ import Contact from "@/components/sections/contact";
 import Footer from "@/components/sections/footer";
 import Hero from "@/components/sections/hero";
 import Experience from "@/components/sections/journey";
+import Now from "@/components/sections/now";
 import Stack from "@/components/sections/stack";
 import Work from "@/components/sections/work";
 import Writing from "@/components/sections/writing";
@@ -18,6 +19,7 @@ export default function Page() {
       <Hero banner={profile.banner} />
 
       <main className="relative z-10">
+        <Now />
         <Experience />
         <Work />
         <About />

@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Hanken_Grotesk, Instrument_Serif } from "next/font/google";
+import { Hanken_Grotesk, Instrument_Serif, Pacifico } from "next/font/google";
 import ThemeScript from "@/components/theme-script";
 import { profile } from "@/lib/data";
 import "./globals.css";
@@ -15,6 +15,13 @@ const instrument = Instrument_Serif({
   weight: "400",
   style: ["normal", "italic"],
   variable: "--font-instrument",
+  display: "swap",
+});
+
+const pacifico = Pacifico({
+  subsets: ["latin"],
+  weight: "400",
+  variable: "--font-pacifico",
   display: "swap",
 });
 
@@ -41,7 +48,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       lang="en"
       data-theme="dark"
       suppressHydrationWarning
-      className={`${hanken.variable} ${instrument.variable}`}
+      className={`${hanken.variable} ${instrument.variable} ${pacifico.variable}`}
     >
       <head>
         <ThemeScript />
