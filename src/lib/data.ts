@@ -261,6 +261,7 @@ export const projects: Project[] = [
     status: "Live",
     href: "https://file-uploader-3gqw.onrender.com/",
     repo: "https://github.com/Slimdaddy254/file-uploader",
+    cover: "/file-upload.jpeg",
     accent: "#38bdf8",
   },
 ];
