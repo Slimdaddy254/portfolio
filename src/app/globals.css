@@ -55,6 +55,8 @@
   --font-sans: var(--font-hanken), ui-sans-serif, system-ui, sans-serif;
   --font-serif: var(--font-instrument), ui-serif, Georgia, serif;
   --font-script: var(--font-pacifico), var(--font-instrument), cursive;
+  /* Hero quote only. */
+  --font-quote: var(--font-fraunces), var(--font-instrument), Georgia, serif;
 
   --radius-card: 0.625rem;
 }
@@ -62,6 +64,8 @@
 html {
   scroll-behavior: smooth;
   -webkit-text-size-adjust: 100%;
+  /* Anchor targets stop below the viewport edge instead of flush against it. */
+  scroll-padding-top: 1.5rem;
 }
 
 body {

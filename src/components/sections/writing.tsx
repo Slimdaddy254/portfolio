@@ -1,8 +1,9 @@
 import Reveal from "@/components/reveal";
 import { Section } from "@/components/section";
+import WritingTabs from "@/components/writing-tabs";
 import { getPosts } from "@/lib/medium";
 import { links } from "@/lib/data";
-import { ArrowUpRightIcon, MediumIcon } from "@/lib/icons";
+import { MediumIcon } from "@/lib/icons";
 
 export default async function Writing() {
   const posts = await getPosts(6);
@@ -14,29 +15,7 @@ export default async function Writing() {
           Posts are fetched from Medium at build time — none are available right now.
         </p>
       ) : (
-        <div className="border-t border-border">
-          {posts.map((post, i) => (
-            <Reveal key={post.url} delay={i * 40}>
-              <a
-                href={post.url}
-                target="_blank"
-                rel="noreferrer noopener"
-                className="group flex items-start gap-4 border-b border-border py-5 transition-colors hover:bg-card sm:py-6"
-              >
-                <div className="min-w-0 flex-1">
-                  <h3 className="text-base font-medium transition-colors group-hover:text-muted-foreground">
-                    {post.title}
-                  </h3>
-                  <p className="mt-1 text-sm text-muted-foreground">
-                    {post.displayDate}
-                    {post.minutes ? ` · ${post.minutes} min read` : ""}
-                  </p>
-                </div>
-                <ArrowUpRightIcon className="mt-1 size-4 shrink-0 text-muted-foreground opacity-0 transition-opacity group-hover:opacity-100" />
-              </a>
-            </Reveal>
-          ))}
-        </div>
+        <WritingTabs posts={posts} />
       )}
 
       <Reveal className="mt-8 flex flex-wrap items-center gap-4">

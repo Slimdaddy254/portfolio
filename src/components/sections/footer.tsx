@@ -1,6 +1,7 @@
 import Reveal from "@/components/reveal";
-import { links, profile } from "@/lib/data";
+import { cal, links, profile } from "@/lib/data";
 import {
+  CalendarIcon,
   GithubIcon,
   LinkedInIcon,
   MailIcon,
@@ -20,6 +21,7 @@ const platforms = [
 
 const contactItems = [
   { href: `mailto:${profile.email}`, label: profile.email, Icon: MailIcon },
+  { href: cal.url, label: "Book a 30-minute call", Icon: CalendarIcon },
 ];
 
 export default function Footer() {
@@ -61,6 +63,10 @@ export default function Footer() {
                   <li key={label}>
                     <a
                       href={href}
+                      {...(href.startsWith("http") && {
+                        target: "_blank",
+                        rel: "noopener noreferrer",
+                      })}
                       className="inline-flex items-center gap-2.5 text-sm text-muted-foreground transition-colors hover:text-foreground"
                     >
                       <Icon className="size-4" />

@@ -1,5 +1,6 @@
 import Reveal from "@/components/reveal";
 import { Section } from "@/components/section";
+import TechLogo from "@/components/tech-logo";
 import { stack } from "@/lib/data";
 
 export default function Stack() {
@@ -18,12 +19,13 @@ export default function Stack() {
               {group.title}
             </h3>
             <ul className="flex flex-wrap gap-1.5">
-              {group.items.map((item) => (
+              {group.items.map(({ label, icon }) => (
                 <li
-                  key={item}
-                  className="rounded-lg bg-chip px-2.5 py-1 text-sm text-foreground/85"
+                  key={label}
+                  className="group inline-flex items-center gap-1.5 rounded-lg bg-chip py-1 pl-1.5 pr-2.5 text-sm text-foreground/85 transition-colors hover:bg-card"
                 >
-                  {item}
+                  {icon && <TechLogo name={icon} />}
+                  {label}
                 </li>
               ))}
             </ul>

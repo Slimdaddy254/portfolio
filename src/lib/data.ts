@@ -17,7 +17,7 @@ export const profile = {
   email: "shadymutethia@gmail.com",
   linkedin: "https://www.linkedin.com/in/shadrack-mutethia",
   resume: "/resume.pdf",
-  avatar: "/anime-passport.png",
+  avatar: "/avatar-light.png",
   /** Shown instead of `avatar` while the dark theme is active. */
   avatarDark: "/anime-dark.jpeg",
   // About section portrait — separate from the hero avatar on purpose.
@@ -34,19 +34,44 @@ export const links = {
   medium: "https://medium.com/@shadymutethia",
 } as const;
 
+/*
+ * Cal.com booking. `link` is the path after cal.com/ — the username and event
+ * slug. `url` is the absolute form, used as the fallback when the embed script
+ * can't load, so keep the two in step if you change event types.
+ */
+export const cal = {
+  link: "shadrack-mutethia-xbw47a/30min",
+  url: "https://cal.com/shadrack-mutethia-xbw47a/30min",
+  label: "Book a call",
+} as const;
+
 /** Compact links in the header, next to the name. */
 export const headerSocials = ["github", "twitter", "linkedin", "resume"] as const;
 
-/** Full set of platforms, shown in the footer. */
+/** Section menu under the hero. Trimmed to the sections worth jumping to. */
 export const nav = [
-  { label: "Now", id: "now" },
   { label: "About", id: "about" },
   { label: "Experience", id: "journey" },
   { label: "Work", id: "work" },
-  { label: "Writing", id: "writing" },
-  { label: "Stack", id: "stack" },
+  { label: "Publications", id: "publications" },
   { label: "Contact", id: "contact" },
 ];
+
+export type Publication = {
+  title: string;
+  /** Where it appeared — journal, conference, newsletter, etc. */
+  venue: string;
+  year: string;
+  detail?: string;
+  href?: string;
+};
+
+/*
+ * TODO: fill this in. Papers, talks, guest articles, anything with a citation
+ * you'd put on a CV. The section renders a short fallback while this is empty,
+ * so leaving it blank is safe.
+ */
+export const publications: Publication[] = [];
 
 export const intro = {
   /*
@@ -266,72 +291,86 @@ export const projects: Project[] = [
   },
 ];
 /*
- * Languages come from GitHub's language stats; tools from what the repos
- * actually import. Prune anything you don't want to be asked about.
+ * Trimmed to what I'd actually be happy to be interviewed on, and to what the
+ * CV supports.
+ *
+ * Cut: C, C++, HTML5 and CSS3 (coursework; HTML/CSS is table stakes that reads
+ * as padding), all three of Redux/Zustand/TanStack Query (listing every state
+ * library is a list, not a choice — TanStack Query stayed as the one), Logstash
+ * and Kibana (ELK is one toolchain; Elasticsearch stayed), and JWT, MySQL,
+ * Redis, Jenkins, Bruno and Testing Library, none of which appear in a shipped
+ * project below. Postman took Bruno's slot: same job, better recognised.
+ *
+ * FastAPI is here because the Tiberbu FHIR work runs a Python backend.
+ *
+ * Kept despite no matching logo: AWS. simple-icons ships no Amazon mark, but
+ * that's a reason the icon is missing, not a reason to hide a credential.
+ *
+ * `icon` is the key in TECH_ICONS. Items without one are skills rather than
+ * products, so they render as plain text chips.
  */
 export const stack = {
   groups: [
     {
       title: "Languages",
-      items: ["JavaScript", "TypeScript", "Python", "C", "C++", "SQL", "HTML5", "CSS3"],
+      items: [
+        { label: "JavaScript", icon: "javascript" },
+        { label: "TypeScript", icon: "typescript" },
+        { label: "Python", icon: "python" },
+        { label: "SQL" },
+      ],
     },
     {
       title: "Frontend",
       items: [
-        "React",
-        "Next.js",
-        "Vite",
-        "Tailwind CSS",
-        "Redux",
-        "TanStack Query",
-        "Zustand",
+        { label: "React", icon: "react" },
+        { label: "Next.js", icon: "nextdotjs" },
+        { label: "Tailwind CSS", icon: "tailwindcss" },
+        { label: "TanStack Query", icon: "tanstack" },
+        { label: "Vite", icon: "vite" },
       ],
     },
     {
       title: "Backend",
       items: [
-        "Node.js",
-        "Express.js",
-        "Frappe Framework",
-        "RESTful APIs",
-        "JWT",
-        "Microservices",
+        { label: "Node.js", icon: "nodedotjs" },
+        { label: "Express", icon: "express" },
+        { label: "FastAPI", icon: "fastapi" },
+        { label: "Frappe Framework", icon: "frappe" },
+        { label: "RESTful APIs" },
       ],
     },
     {
       title: "Databases",
       items: [
-        "PostgreSQL",
-        "MongoDB",
-        "MySQL",
-        "MariaDB",
-        "Redis",
-        "Query Optimisation",
+        { label: "PostgreSQL", icon: "postgresql" },
+        { label: "MariaDB", icon: "mariadb" },
+        { label: "MongoDB", icon: "mongodb" },
+        { label: "Query Optimisation" },
       ],
     },
     {
-      title: "Cloud & DevOps",
+      // Monitoring merged in: standing alone it was two items in a column that
+      // was mostly empty, and observability belongs beside the deploy tooling
+      // that produces it.
+      title: "Cloud & Monitoring",
       items: [
-        "AWS",
-        "Docker",
-        "CI/CD",
-        "Jenkins",
-        "GitHub Actions",
+        { label: "AWS" },
+        { label: "Docker", icon: "docker" },
+        { label: "GitHub Actions", icon: "githubactions" },
+        { label: "CI/CD" },
+        { label: "Prometheus", icon: "prometheus" },
+        { label: "Grafana", icon: "grafana" },
+        { label: "Elasticsearch", icon: "elasticsearch" },
       ],
-    },
-    {
-      title: "Monitoring",
-      items: ["Prometheus", "Grafana", "Elasticsearch", "Logstash", "Kibana"],
     },
     {
       title: "Testing & Tools",
       items: [
-        "Jest",
-        "React Testing Library",
-        "Git",
-        "GitHub",
-        "Postman",
-        "Bruno",
+        { label: "Jest", icon: "jest" },
+        { label: "Git", icon: "git" },
+        { label: "GitHub", icon: "github" },
+        { label: "Postman", icon: "postman" },
       ],
     },
   ],
@@ -345,4 +384,6 @@ export const contact = {
   quoteAuthor: "Steve Jobs",
   heading: "Let's connect",
   sub: "Find me on these platforms",
+  /** Note under the booking CTA, kept short so it doesn't crowd the buttons. */
+  bookingNote: "30 minutes, no pitch. Pick a time that suits your timezone.",
 };

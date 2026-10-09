@@ -1,4 +1,5 @@
 import Image from "next/image";
+import NavMenu from "@/components/nav-menu";
 import Reveal from "@/components/reveal";
 import ThemeAvatar from "@/components/theme-avatar";
 import ThemeToggle from "@/components/theme-toggle";
@@ -61,7 +62,15 @@ export default function Hero({ banner }: { banner?: string }) {
               dissolving into the page. */}
           <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
           <div className="absolute inset-x-0 bottom-5 px-6 text-center">
-            <p className="mx-auto max-w-xl font-serif text-base italic leading-snug text-white/90 sm:text-xl">
+            {/*
+              Fraunces at this size wants a mid optical-size cut and a slightly
+              soft setting — its default display cut is too angular to read
+              cleanly against the dark scrim.
+            */}
+            <p
+              className="mx-auto max-w-xl font-quote text-lg italic leading-snug text-white/90 sm:text-2xl"
+              style={{ fontVariationSettings: '"SOFT" 40, "opsz" 36' }}
+            >
               {profile.motto}
             </p>
             {profile.mottoAuthor && (
@@ -112,6 +121,8 @@ export default function Hero({ banner }: { banner?: string }) {
             <ThemeToggle />
           </div>
         </div>
+
+        <NavMenu />
 
         <div className="mt-10 space-y-4 pb-16 sm:mt-12 sm:pb-20">
           {intro.intro.map((p) => (

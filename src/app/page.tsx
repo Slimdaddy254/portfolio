@@ -6,6 +6,7 @@ import Footer from "@/components/sections/footer";
 import Hero from "@/components/sections/hero";
 import Experience from "@/components/sections/journey";
 import Now from "@/components/sections/now";
+import Publications from "@/components/sections/publications";
 import Stack from "@/components/sections/stack";
 import Work from "@/components/sections/work";
 import Writing from "@/components/sections/writing";
@@ -24,6 +25,7 @@ export default function Page() {
         <Work />
         <About />
         <Writing />
+        <Publications />
         <Stack />
         <Contact />
       </main>

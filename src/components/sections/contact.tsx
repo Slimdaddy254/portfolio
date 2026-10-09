@@ -1,7 +1,9 @@
+import BookingButton from "@/components/booking";
 import Reveal from "@/components/reveal";
 import { Section } from "@/components/section";
 import ThemeAvatar from "@/components/theme-avatar";
-import { contact, profile } from "@/lib/data";
+import { cal, contact, profile } from "@/lib/data";
+import { CalendarIcon } from "@/lib/icons";
 
 export default function Contact() {
   return (
@@ -14,13 +16,24 @@ export default function Contact() {
               {contact.closer}
             </p>
 
-            <a
-              href={`mailto:${profile.email}`}
-              className="mt-6 inline-flex items-center gap-2.5 rounded-full border border-border bg-card px-6 py-3 text-sm transition-colors hover:bg-chip"
-            >
-              <ThemeAvatar decorative sizes="24px" className="size-6" />
-              {contact.ctaLabel}
-            </a>
+            <div className="mt-6 flex flex-wrap items-center justify-center gap-3">
+              <a
+                href={`mailto:${profile.email}`}
+                className="inline-flex items-center gap-2.5 rounded-full border border-border bg-card px-6 py-3 text-sm transition-colors hover:bg-chip"
+              >
+                <ThemeAvatar decorative sizes="24px" className="size-6" />
+                {contact.ctaLabel}
+              </a>
+
+              <BookingButton>
+                <CalendarIcon className="size-4" />
+                {cal.label}
+              </BookingButton>
+            </div>
+
+            <p className="mt-4 max-w-xs text-xs leading-relaxed text-muted-foreground">
+              {contact.bookingNote}
+            </p>
 
             <figure className="mt-14 w-full max-w-sm rounded-[10px] border border-border p-8 text-center">
               <blockquote className="font-serif text-lg italic text-foreground/90">

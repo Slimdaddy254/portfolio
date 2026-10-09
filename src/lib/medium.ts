@@ -9,7 +9,61 @@ export type Post = {
   displayDate: string;
   /** Minutes, from the feed's read-time metadata when present. */
   minutes?: number;
+  /** Slugs of the Medium tags on the post. */
+  categories: string[];
 };
+
+/** The three shelves Writing is split across. */
+export type Group = "tech" | "mind" | "ideas";
+
+export const GROUPS: { id: Group; label: string }[] = [
+  { id: "tech", label: "Technology" },
+  { id: "mind", label: "Life & Mind" },
+  { id: "ideas", label: "Ideas & History" },
+];
+
+/*
+ * Medium tags mapped onto the groups. First match wins, so order matters: a
+ * post tagged both `software-development` and `productivity` lands in
+ * Technology.
+ *
+ * "ideas" is deliberately absent — it's the fallback. Anything unmatched,
+ * including posts Medium returns with no tags at all, lands there.
+ */
+const GROUP_TAGS: Record<Exclude<Group, "ideas">, string[]> = {
+  tech: [
+    "software-engineering",
+    "software-development",
+    "artificial-intelligence",
+    "ai-agent",
+    "open-source",
+    "programming",
+    "web-development",
+    "history-of-technology",
+    "technology",
+  ],
+  mind: [
+    "productivity",
+    "lifestyle",
+    "healthy-lifestyle",
+    "mental-health",
+    "work-life-balance",
+    "thinking",
+    "intellect",
+    "reflection",
+    "reflections",
+    "literature",
+    "memoir",
+  ],
+};
+
+/** Buckets a post's tags into a group, defaulting to "ideas". */
+export function groupOf(categories: string[]): Group {
+  for (const group of ["tech", "mind"] as const) {
+    if (categories.some((tag) => GROUP_TAGS[group].includes(tag))) return group;
+  }
+  return "ideas";
+}
 
 const FEED = "https://medium.com/feed/@shadymutethia";
 
@@ -38,7 +92,6 @@ export const getPosts = cache(async (limit = 6): Promise<Post[]> => {
 
 function parseFeed(xml: string, limit: number): Post[] {
   const items = xml.match(/<item>[\s\S]*?<\/item>/g) ?? [];
-
   return items.slice(0, limit).flatMap((item) => {
     const title = pick(item, "title");
     const rawUrl = pick(item, "link");
@@ -64,6 +117,7 @@ function parseFeed(xml: string, limit: number): Post[] {
           timeZone: "UTC",
         }),
         ...(Number.isFinite(minutes) && minutes > 0 ? { minutes } : {}),
+        categories: pickAll(item, "category").map(decodeCdata),
       },
     ];
   });
@@ -74,10 +128,17 @@ function pick(xml: string, tag: string): string | null {
   return match?.[1]?.trim() ?? null;
 }
 
+/** Every occurrence of a tag — Medium repeats `<category>` once per tag. */
+function pickAll(xml: string, tag: string): string[] {
+  return [...xml.matchAll(new RegExp(`<${tag}>([\\s\\S]*?)</${tag}>`, "g"))]
+    .map((match) => match[1].trim())
+    .filter(Boolean);
+}
+
 function decodeCdata(value: string): string {
   return value
-    .replace(/^\s*<!\[CDATA\[/, "")
-    .replace(/\]\]>\s*$/, "")
+    .replace(/^<!\[CDATA\[/, "")
+    .replace(/\]\]>$/, "")
     .replace(/&amp;/g, "&")
     .replace(/&lt;/g, "<")
     .replace(/&gt;/g, ">")
