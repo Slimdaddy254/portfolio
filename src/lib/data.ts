@@ -188,8 +188,8 @@ export type EducationEntry = {
 
 export const education: EducationEntry[] = [
   {
-    title: "BSc in Energy Technology",
-    org: "Kenyatta University, School of Engineering",
+    title: "BSc in Energy Engineering",
+    org: "Kenyatta University",
     period: "2016 — 2022",
     detail:
       "Coursework included programming in C, C++, and Python, data structures and algorithms, database systems, software development, and systems design.",
@@ -198,7 +198,7 @@ export const education: EducationEntry[] = [
   {
     title: "The Odin Project — Full Stack JavaScript Path",
     org: "Self-paced",
-    period: "2022 — 2023",
+    period: "2021 — 2022",
     detail:
       "Full-stack curriculum across HTML, CSS, JavaScript, React, Node.js, Express, MongoDB, PostgreSQL, Git, testing, and deployment.",
     tags: ["JavaScript", "React", "Node.js", "Testing", "Deployment"],
